@@ -1,7 +1,6 @@
 data "aws_ami" "centos" {
   most_recent = true
   owners = ["973714476881"]
-  name_regex = "centos-8-DevOps-practice"
 }
 
 variable "instance_type" {
