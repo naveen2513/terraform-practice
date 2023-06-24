@@ -3,9 +3,7 @@ data "aws_ami" "centos" {
   owners = ["973714476881"]
 }
 
-variable "instance_type" {
-  default = "t3.micro"
-}
+
 data "aws_security_group" "allow-all" {
   name = "allow-all"
 }
@@ -20,7 +18,7 @@ variable "components" {
     }
     mongodb = {
       name          = "mongodb"
-      instance_type = "t3.micro"
+      instance_type = "t3.small"
     }
     catalogue = {
       name          = "catalogue"
@@ -36,7 +34,7 @@ variable "components" {
     }
     redis = {
       name          = "redis"
-      instance_type = "t3.micro"
+      instance_type = "t3.small"
     }
     shipping = {
       name          = "shipping"
@@ -44,15 +42,15 @@ variable "components" {
     }
     mysql = {
       name          = "mysql"
-      instance_type = "t3.micro"
+      instance_type = "t3.small"
     }
     rabbitmq = {
       name          = "rabbitmq"
-      instance_type = "t3.micro"
+      instance_type = "t3.small"
     }
     payment = {
       name          = "payment"
-      instance_type = "t3.micro"
+      instance_type = "t3.small"
     }
   }
 }
