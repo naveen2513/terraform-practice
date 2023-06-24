@@ -17,7 +17,7 @@ variable "components" {
     name          = "frontend"
     instance_type = "t3.micro"
    }
-   mongodb{
+   mongodb {
     name          = "mongodb"
    instance_type = "t3.micro"
 }
@@ -53,7 +53,6 @@ payment {
   name          = "payment"
   instance_type = "t3.micro"
 }
-
 }
 }
 
