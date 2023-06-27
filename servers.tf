@@ -11,8 +11,8 @@ resource "aws_instance" "instance" {
 }
 resource "null_resource" "provisioner" {
   depends_on = [aws_instance.instance, aws_route53_record.records]
-
   for_each = var.components
+
   provisioner "remote-exec" {
     connection {
       type     = "ssh"
@@ -24,8 +24,7 @@ resource "null_resource" "provisioner" {
       "rm -rf shell-practice",
       "git clone http://github.com/naveen2513/shell-practice.git ",
       "cd shell-practice",
-      "sudo bash ${each.value["name"]}.sh ${lookup(each.value, "passwoord", "null" )}"
-
+      "sudo bash ${each.value["name"]}.sh ${lookup(each.value, "passwoord", "null") }"
 
     ]
   }
