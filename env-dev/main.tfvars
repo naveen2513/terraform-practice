@@ -5,7 +5,7 @@ components = {
   }
   mongodb = {
     name = "mongodb"
-    instance_type = "t3.micro"
+    instance_type = "t3.medium"
   }
   catalogue = {
     name = "catalogue"
@@ -25,7 +25,7 @@ components = {
   }
   mysql = {
     name = "mysql"
-    instance_type = "t3.micro"
+    instance_type = "t3.medium"
     password = "RoboShop@1"
   }
   shipping = {
@@ -37,7 +37,7 @@ components = {
   }
   rabbitmq = {
     name = "rabbitmq"
-    instance_type = "t3.micro"
+    instance_type = "t3.medium"
     password = "roboshop123"
 
   }
