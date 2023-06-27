@@ -9,16 +9,21 @@ resource "aws_instance" "instance" {
   tags = {
     Name = each.value["name"]
   }
+}
+resource "null_resource" "provisinor" {
+  depends_on = [aws_instance.instance, aws_route53_record.records]
+
+  for_each = var.components
   provisioner "remote-exec" {
     connection {
       type     = "ssh"
       user     = "centos"
       password = "DevOps321"
-      host     = self.private_ip
+      host     = aws_instance.instance[each.value["name"]].private_ip
     }
     inline = [
       "rm -rf shell-practice",
-      "git clone http;//github.com/naveen2513/shell-practice.git ",
+      "git clone http://github.com/naveen2513/shell-practice.git ",
       "cd shell-practice",
       "sudo bash ${each.value["name"]}.sh"
 
