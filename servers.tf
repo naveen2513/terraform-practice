@@ -1,40 +1,10 @@
-resource "aws_instance" "instance" {
+module "servers" {
   for_each = var.components
-  ami           = data.aws_ami.centos.image_id
+
+  source = "./module"
+  component_name = each.value["name"]
   instance_type = each.value["instance_type"]
-  vpc_security_group_ids = [ data.aws_security_group.allow-all.id ]
+  password = lookup(each.value, "password", "null" )
+  env = var.env
 
-
-  tags = {
-    Name = each.value["name"]
-  }
-}
-resource "null_resource" "provisioner" {
-
-  depends_on = [aws_instance.instance, aws_route53_record.records]
-  for_each = var.components
-
-  provisioner "remote-exec" {
-    connection {
-      type     = "ssh"
-      user     = "centos"
-      password = "DevOps321"
-      host     = aws_instance.instance[each.value["name"]].private_ip
-    }
-    inline = [
-      "rm -rf roboshop-scripting",
-      "git clone http://github.com/naveen2513/roboshop-scripting.git ",
-      "cd roboshop-scripting",
-      "sudo bash ${each.value["name"]}.sh ${lookup(each.value, "password", "null") }"
-
-    ]
-  }
-}
-resource "aws_route53_record" "records" {
-  for_each = var.components
-  zone_id = "Z09466133SH7C438NSMD2"
-  name    = "${each.value["name"]}-dev.naveendevops2.online"
-  type    = "A"
-  ttl     = 30
-  records = [aws_instance.instance[each.value["name"]].private_ip]
 }
