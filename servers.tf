@@ -24,7 +24,7 @@ resource "null_resource" "provisioner" {
       "rm -rf shell-practice",
       "git clone http://github.com/naveen2513/shell-practice.git ",
       "cd shell-practice",
-      "sudo bash ${each.value["name"]}.sh ${lookup(each.value, "passwoord", "null") }"
+      "sudo bash ${each.value["name"]}.sh ${lookup(each.value, "password", "null") }"
 
     ]
   }
