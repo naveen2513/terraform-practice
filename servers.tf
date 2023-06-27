@@ -22,9 +22,9 @@ resource "null_resource" "provisioner" {
       host     = aws_instance.instance[each.value["name"]].private_ip
     }
     inline = [
-      "rm -rf shell-practice",
-      "git clone http://github.com/naveen2513/shell-practice.git ",
-      "cd shell-practice",
+      "rm -rf roboshop-scripting",
+      "git clone http://github.com/naveen2513/roboshop-scripting.git ",
+      "cd roboshop-scripting",
       "sudo bash ${each.value["name"]}.sh ${lookup(each.value, "password", "null") }"
 
     ]
