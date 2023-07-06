@@ -1,4 +1,4 @@
-database_servers = {
+app_servers = {
   frontend = {
     name = "frontend"
     instance_type = "t3.micro"
@@ -34,7 +34,7 @@ database_servers = {
   }
 
 }
-app_servers = {
+database_servers = {
   mongodb = {
     name = "mongodb"
     instance_type = "t3.medium"
