@@ -10,6 +10,7 @@ module "database-servers" {
 
 }
 module "app-servers" {
+  depends_on = [module.database-servers]
   for_each = var.app-servers
 
   source = "./module"
