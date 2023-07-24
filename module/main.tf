@@ -22,6 +22,7 @@ resource "null_resource" "provisioner" {
       password = "DevOps321"
       host     = aws_instance.instance.private_ip
     }
+
     inline = var.app_type == "db" ? local.db_commands : local.app_commands
   }
 }
@@ -33,7 +34,7 @@ resource "aws_route53_record" "records" {
   records = [aws_instance.instance.private_ip]
 }
 resource "aws_iam_role" "role" {
-  name = "${var.component_name}.${var.env}-role"
+  name = "${var.component_name}-${var.env}-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -50,7 +51,7 @@ resource "aws_iam_role" "role" {
   })
 
   tags = {
-    tag-key = "${var.component_name}.${var.env}-role"
+    tag-key = "${var.component_name}-${var.env}-role"
   }
 }
 
